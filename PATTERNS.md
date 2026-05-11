@@ -1,0 +1,1 @@
+patternler buraya yazılacak
