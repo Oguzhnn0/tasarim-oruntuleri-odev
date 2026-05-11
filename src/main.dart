@@ -1,22 +1,37 @@
-class NotificationManager {
-  
-  void sendNotification (String tip, String mesaj, String alici){
+abstract class Notification{
+  void sendNotification(String mesaj, String alici);
+}
 
-    if (tip == "E-mail"){
-      print("E-mail $alici kişisine gönderiliyor...");
-    }else if (tip == "SMS"){
-      print("SMS $alici kişisine gönderiliyor...");
-    }else{
-      print("Bilinmeyen tip!!!");
-    }
-
+class EmailNotification extends Notification{
+  @override
+  void sendNotification(String mesaj, String alici) {
+    print("E-mail $alici kişisine gönderildi.");
   }
 }
 
-void main(){
+class SmsNotification extends Notification{
+  @override
+  void sendNotification(String mesaj, String alici) {
+    print("SMS $alici kişisine gönderildi.");
+  }
+}
 
-  var notification = NotificationManager();
+class NotificationFactoryMethod {
+  static Notification createNotification(String type) {
+    if (type == "E-mail") {
+      return EmailNotification();
+    } else if (type == "SMS") {
+      return SmsNotification();
+    }
+    throw Exception("Bilinmeyen tip!!!");
+  }
+}
 
-  notification.sendNotification("E-mail", "deneme 1 2 3", "ogz@example.com");
-  notification.sendNotification("SMS", "deneme 1 2 3", " 555 555 55 55");
+void main() {
+  
+  var email = NotificationFactoryMethod.createNotification("E-mail");
+  email.sendNotification("E-mail deneme mesajı", "ogz@example.com");
+
+  var sms = NotificationFactoryMethod.createNotification("SMS");
+  sms.sendNotification("SMS deneme mesajı", "555 555");
 }
