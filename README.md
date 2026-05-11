@@ -1,1 +1,1 @@
-# tasarim-oruntuleri-odev
+A) Bir mobil geliştirici adayı olarak bildirim sistemlerini öğrenmek ve gelecekteki projelerimde bu konuyu kodlarken karşıma çıkabilecek hataları veya kod karmaşalarını pattern kullanarak çözmeyi öğrenmek için bu konuyu seçtim.
