@@ -31,3 +31,25 @@ Sistemimdeki mevcut sınıflarına (sms ve e-mail) dokunmadan, onlara dışarıd
 
 Ne Kazandım :
 Sistemimdeki sınıflara(sms ve e-mail) ileride yeni özellikler eklemek istersem bu özellikleri sınıfların iç kodlarına dokunmadan dışarıdan ekleyebilme esnekliği kazandım.
+
+Faz3 Dökümantasyonu
+-------------------
+1)Chain of Responsibility
+Nerede Kullandım :
+Mesajın gönderimden önceki tüm kontrol süreçlerinde kullandım. EmptyMessageValidator, SpamValidator ve en son SendHandler sınıflarını birbirine bağladım. Bu sayede sorumluluk zincirini olabildiğince sağlam kurgulamayı amaçladım.
+
+Neden Kullandım :
+Bu patterni kullanmasam bütün bu kontrolleri if-else bloklarıyla yapmam gerekecekti. Bu gereksiz kod karmaşasına ve yönetimi zor bir koda sebep olacaktı. İleride kontrolleri düzenlemek/geliştirmek veya yeni kontroller eklemek istediğimde kod iyice karmaşıklaşacak ve bozulacaktı. Ben bu patterni kullanarak her bir kontrolün kendi sınıfı olmasını ve birbirinden bağımsız olmasını sağladım.
+
+Ne Kazandım :
+Daha esnek ve modülerliği daha yüksek bir kod elde ettim. Artık sisteme yeni kontroller eklemek, mevcut kontrolleri güncellemek/geliştirmek veya kontrollerin sırasını değiştirmek daha kolay oldu. Yeni kontrol eklemek istediğimde mevcut kodlara dokunmadan bu işlemi yapabileceğim için yönetimi daha kolay bir kod elde ettim. Ayrıca bu zincirli yapı sayesinde hata yönetimi ve hata tespiti daha kolay hale geldi. Herhangi bir kontrolde hata tespit edilirse sistem patlamadan kolayca bildirim gönderimi durdurulabiliyor.
+
+2)Observer Pattern
+Nerede Kullandım :
+Bildirim gönderildikten sonra yapılacak diğer işlemlerin kontrolünden kullandım. Örneğin kodumda bulunan LoggerObserver ve AnalyticsObserver sınıfları bildirim gönderildikten sonra yapılacak olan loglama ve analiz kayıt işlemlerini yapıyor.
+
+Neden Kullandım :
+Sistemimizde bildirim gönderildiğinde belli başlı işlemler(loglama vs) kullanmamız gerektiği için ve tüm bu işlemleri gönderici sınıfın tanıması sıkı bağlılık oluşturacağı için Observer Pattern kullandım. Bu sayede oluşacak sıkı bağlılığın önüne geçtim ve sistemi daha kontrol edilebilir ve yönetilebilir bir hale getirdim. Ayrıca Observer Pattern sayesinde artık sisteme yeni gözlemciler eklemek istediğimde mevcut sınıfların kodları ile uğraşmak yerine yeni bir gözlemci sınıfı oluşturup bunu sisteme entegre ederek yeni gözlemci ekleyebiliyorum.
+
+Ne Kazandım :
+Sistemde oluşacak olası bir sıkı bağlılığı engelleyerek gevşek bağlılık oluşturdum bu sayede gönderici sınıfı sadevce kendi işi ile ilgilenebiliyor. Arka planda yapılan loglama vb. işlemlerle ilgilenmiyor. Ayrıca Observer Pattern kullanımı ile beraber artık sisteme yeni gözlemciler eklemek çok daha kolay hale geldi. Kodumuz daha optimize, daha yönetilebilir ve daha genişletilebilir bir hal aldı.
