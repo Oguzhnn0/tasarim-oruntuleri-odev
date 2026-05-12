@@ -16,6 +16,6 @@ jobs:
         with:
           sdk: stable
       - name: Analyze src/main.dart
-        run: dart analyze main.dart
-      - name: Run main.dart
+        run: dart analyze src/main.dart
+      - name: Run src/main.dart
         run: dart src/main.dart
