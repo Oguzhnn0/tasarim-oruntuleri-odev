@@ -15,7 +15,7 @@ jobs:
       - uses: dart-lang/setup-dart@v1
         with:
           sdk: stable
-      - name: Analyze main.dart
+      - name: Analyze src/main.dart
         run: dart analyze main.dart
       - name: Run main.dart
-        run: dart main.dart
+        run: dart src/main.dart
