@@ -1,1 +1,21 @@
-burası dolacak
+name: Dart CI (Minimalist)
+
+on:
+  push:
+    branches: [ main, phase-1, phase-2, phase-3 ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Analyze main.dart
+        run: dart analyze main.dart
+      - name: Run main.dart
+        run: dart main.dart
